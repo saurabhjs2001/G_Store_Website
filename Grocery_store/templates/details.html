@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div class="col-md-10 mt-2 ">
+    <div class="card shadow mt-2 " style="width: 100%; margin-left: 10px; padding-bottom: 10px;">
+        <div class="row">
+            <div class="col-md-5 product-image-container ">
+                <img src="{{products.Pimage.url}}" class="card-img-top" width="100%" height="500px">
+            </div>
+
+            <!-- Product Details -->
+            <div class="col-md-7" style="padding-right: 10px;">
+                <h2>{{products.name}}</h2><hr>
+                <h5>{{products.category}}</h5>
+                {% if products.discount_percentage > 0 %}
+                <p>
+                    <span style="color:black;" class="price-section">
+                        <strong>🏷️Price: ₹{{ products.discounted_price|floatformat:2 }}
+                            &nbsp;/{{products.measures}}</strong> <br>
+                    </span>
+                    <strong>MRP:</strong>
+                    <span style="text-decoration: line-through; color:red;">
+                        ₹{{ products.price }}
+                    </span>&nbsp;
+                    <span style="color: green;">{{products.discount_percentage}}% off</span>
+                </p>
+                {% elif Products.is_discounted %}
+                <p>
+                    <span class="text-success fw-bold">
+                        ₹{{ products.discounted_price }}
+                    </span>
+                </p>
+                <p class="text-danger">
+                    You save ₹{{ products.save_amount|floatformat:2 }}!
+                </p>
+                {% else %}
+                <p><strong>Price: ₹{{ products.price }}</strong></p>
+                {% endif %} <hr>
+                <h5>Discription :</h5>
+                <h5>{{products.description}}</h5><hr>
+                <a href="/addtocart/{{products.id}}" class="btn btn-primary">Add to Cart</a>
+                <a href="/Products" class="btn btn-secondary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock 'main' %}

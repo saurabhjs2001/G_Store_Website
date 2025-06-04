@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Store</title>
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static '/css/external.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+</head>
+
+<body>
+    <!-- main div -->
+    <div class="container-fluid">
+        <!-- header div -->
+        <div class="row">
+            <nav class="navbar navbar-expand-lg nav">
+                <div class="container-fluid">
+                    <b><a class="navbar-brand hov" href="/">&nbsp;<i class="bi bi-house-door"></i> Grocery
+                            Store&nbsp;</a></b>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle hov" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <b>Login/Register</b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item lim" href="#">Help & Support</a></li>
+                                    {% if not request.user.is_authenticated %}
+                                    <li><a class="dropdown-item lim" href="/login">Login</a></li>
+                                    <li><a class="dropdown-item lim" href="/register">Register</a></li>
+                                    {% endif %}
+                                    {% if request.user.is_authenticated %}
+                                    <li><a class="dropdown-item lim" href="/profile">Edit Profile</a></li>
+                                    <li><a class="dropdown-item lim" href="/logout">Logout</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                            <li class="nav-item success">
+                                <b><a class="nav-link hov" href="/about_us">About Us</a></b>
+                            </li>
+                            <li class="nav-item ">
+                                <b><a class="nav-link hov" href="/Contact_Us"><i class="bi bi-telephone"></i> Contact
+                                        Us</a></b>
+                            </li>
+                            <li class="nav-item ">
+                                <b><a class="nav-link hov" href="/myorders/"><i class="bi bi-bag-check"></i> My
+                                        Orders</a></b>
+                            </li>
+                            <li class="nav-item ">
+                                <b><a class="nav-link hov" href="/mycart"><i class="bi bi-bag-plus"></i> My Cart</a></b>
+                            </li>
+                        </ul>
+
+                        <form class="d-flex flex-nowrap" role="search" method="get">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                                name="q" style="min-width: 250px;">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </form>
+
+
+                    </div>
+                </div>
+            </nav>
+        </div>

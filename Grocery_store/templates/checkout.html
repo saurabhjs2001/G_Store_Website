@@ -1,0 +1,48 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block 'main' %}
+
+<div class="container mt-4">
+    <h2 class="text-center text-success mb-4">🛒 Checkout Summary</h2>
+
+    {% for item in cart_items %}
+    <div class="row checkout-card align-items-center">
+        <div class="col-md-2 text-center">
+            <img src="{{ item.productid.Pimage.url }}" alt="{{ item.productid.name }}" class="img-fluid product-image">
+        </div>
+        <div class="col-md-6 product-details">
+            <h5>{{ item.productid.name }}</h5>
+            <p><strong>Category:</strong> {{ item.productid.category }}</p>
+            <p><strong>Description:</strong> {{ item.productid.description }}</p>
+
+            {% if item.productid.discount_percentage > 0 %}
+            <p>
+                <strong>Price:</strong> ₹{{ item.productid.discounted_price|floatformat:2 }}
+                <span class="price-strike">₹{{ item.productid.price|floatformat:2 }}</span>
+                <span class="text-success">({{ item.productid.discount_percentage }}% OFF)</span>
+            </p>
+            {% else %}
+            <p><strong>Price:</strong> ₹{{ item.productid.price|floatformat:2 }}</p>
+            {% endif %}
+        </div>
+        <div class="col-md-2 text-center">
+            <p><strong>Qty:</strong><br> {{ item.quantity }}</p>
+        </div>
+        <div class="col-md-2 text-end">
+            <p><strong>Total:</strong><br>
+                <span class="final-price">
+                    ₹{{ item.quantity|floatformat:2 }} × ₹{{ item.productid.discounted_price|floatformat:2 }} = ₹{{ item.final_price|floatformat:2 }}
+                </span>
+            </p>
+        </div>
+    </div> 
+    {% endfor %}
+
+    <div class="text-end total-section mt-4">
+        <h4><strong>Total Payable Amount: ₹{{ total|floatformat:2 }}</strong></h4>
+        <a href="/makepayment" class="btn btn-success btn-lg mt-3 ms-2">Confirm Order</a>
+        <a href="/mycart" class="btn btn-outline-secondary btn-lg mt-3 ms-2">Back to Cart</a>
+    </div>
+</div>
+
+{% endblock 'main' %}

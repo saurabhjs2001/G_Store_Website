@@ -1,0 +1,75 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block 'main' %}
+
+<div class="container mt-4">
+    <h1 class="bg-success text-white text-center p-2">MY CART</h1>
+    {% if mycart %}
+    <!-- <form method="POST" action="{% url 'checkout_all' %}"> -->
+    <form method="POST" action="{% url 'checkout_selected' %}">
+        {% csrf_token %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        {% for cart in mycart %}
+        <div class="row mb-3 border p-3 align-items-center" style="margin-left: 5px; margin-right: 5px;">
+            
+            <!-- <div class="col-md-1 d-flex align-items-center justify-content-center">
+                <input type="checkbox" name="selected_items" value="{{ cart.id }}" class="form-check-input">
+            </div> -->
+            <div class="col-md-4 text-center">
+                <img src="{{ cart.productid.Pimage.url }}" alt="{{ cart.productid.name }}" class="img-fluid"
+                    style="height: 150px; object-fit: contain;">
+            </div>
+            <div class="col-md-4">
+                <h5>{{ cart.productid.name }}</h5>
+                <p><strong>Category:</strong> {{ cart.productid.category }}</p>
+                <p><strong>Discription</strong>{{cart.productid.description}}</p>
+                {% if cart.productid.discount_percentage > 0 %}
+                <p>
+                    <strong>Price:</strong> ₹{{ cart.productid.discounted_price|floatformat:2 }}
+                    <span class="text-muted text-decoration-line-through">₹{{ cart.productid.price }}</span>
+                    <span class="text-success">{{ cart.productid.discount_percentage }}% off</span>
+                </p>
+                {% else %}
+                <p style="color: red;"><strong>Price:</strong> ₹{{ cart.productid.price }}</p>
+                {% endif %}
+            </div>
+            <div class="col-md-2 text-center">
+                <p><strong>Quantity:</strong></p>
+                <p>
+                    {% if cart.quantity > 1 %}
+                    <a href="/updatequantity/{{ cart.id }}/decr" class="btn btn-primary btn-sm">-</a>
+                    {% endif %}
+                    <span class="mx-2">{{ cart.quantity }}</span>
+                    <a href="/updatequantity/{{ cart.id }}/incr" class="btn btn-primary btn-sm">+</a>
+                </p>
+                <a href="/removecart/{{ cart.id }}" class="btn btn-danger btn-sm">Remove</a>
+            </div>
+        </div>
+        {% endfor %}
+
+
+        <div class="row mt-3 mb-2">
+            <div class="col text-end">
+                <h4><strong>Total: ₹{{Totalbill|floatformat:2 }}</strong></h4>
+                <a href="/Products" class="btn btn-secondary btn-lg">Add More</a>
+                <!-- <button type="submit" class="btn btn-success btn-lg">Checkout Selected</button> -->
+                <a href="{% url 'checkout_all' %}" class="btn btn-success btn-lg">Checkout All </a>
+
+            </div>
+        </div>
+    </form>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        Your cart is empty. Please add products to the cart.
+
+    </div>
+    <center><a href="/Products" class="btn btn-outline-success mt-3">Shop Now</a></center>
+    {% endif %}
+</div>
+
+{% endblock %}

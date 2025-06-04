@@ -1,0 +1,42 @@
+.checkout-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.checkout-card:hover {
+    transform: scale(1.01);
+}
+
+.product-image {
+    max-height: 150px;
+    object-fit: contain;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.product-details h5 {
+    font-weight: bold;
+    color: #333;
+}
+
+.price-strike {
+    text-decoration: line-through;
+    color: gray;
+    font-size: 14px;
+}
+
+.final-price {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.total-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}

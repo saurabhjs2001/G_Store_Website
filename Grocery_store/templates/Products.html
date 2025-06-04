@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+<div class="col-md-10">
+    <div class="row">
+        {% for prod in products %}
+        <div class="col-md-3 mt-3">
+        <!-- <div class="col-md-3 mb-3 card-area"> -->
+            <div class="card product-card">
+                <div class="image-wrapper">
+                    <img class="card-img-top" src="{{ prod.Pimage.url }}" alt="{{ prod.name }}">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">{{ prod.name }}</h6>
+                    <p><strong>{{ prod.category }}</strong></p>
+
+                    {% if prod.discount_percentage > 0 %}
+                    <p>
+                        <strong style="color:black;">Price: ₹{{ prod.discounted_price|floatformat:2 }} /{{prod.measures}}</strong><br>
+                        <strong>MRP:</strong>
+                        <span style="text-decoration: line-through; color: red;">₹{{ prod.price }}</span>
+                        <span style="color: green;">{{ prod.discount_percentage }}% off</span>
+                    </p>
+                    {% else %}
+                    <p><strong>Price: ₹{{ prod.price }}</strong></p>
+                    {% endif %}
+
+                    <a href="/details/{{ prod.id }}" class="btn btn-danger btn-sm">Details</a>
+                    <a href="/addtocart/{{ prod.id }}" class="btn btn-success btn-sm">Add to Cart</a>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock 'main' %}

@@ -1,0 +1,61 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block 'main' %}
+<style>
+    .back-video {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        filter: blur(10px);
+    }
+
+    .llg1 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .form-label {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 25px;
+    }
+</style>
+<!-- body div -->
+<div class="row">
+    <video src="{% static '/images/groceryv1.mp4' %}" class="back-video" autoplay muted loop></video>
+    <div class="llg1">
+        <form action="" method="post" class="col-md-4 mt-3 p-4 mx-auto ronded border shadow" style="margin-bottom: 20px;">
+            {% csrf_token %}
+            <!-- Email input -->
+            <h5 class="log mt-4">Login</h5>
+            {% if error %}
+            <div class="alert alert-danger">{{error}}</div>
+            {% endif %}
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="Email">Username <span>&#42</span>:</label>
+                <input type="text" id="email" class="form-control" placeholder="Enter a Username" name="username"
+                    required>
+            </div>
+
+            <!-- Password input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label">Password<span>&#42</span>:</label>
+                <input type="password" id="password" class="form-control" placeholder="Enter a Password" name="password"
+                    required>
+            </div>
+            <p><a href="/forgetPassword" class="form-label"
+                    style="display: flex; justify-content: center; color: darkblue;"><strong>Forget
+                        Password</strong></a></p>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-success btn-block mb-4">Login</button>
+
+            <!-- Register buttons -->
+            <div class="text mb-4">
+                <p class="form-label"><b>Not a User?</b> <a href="/register"
+                        style="color: darkblue; font-weight: bold;">Register</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock 'main' %}

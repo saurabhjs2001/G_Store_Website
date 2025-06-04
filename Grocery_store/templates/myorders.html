@@ -1,0 +1,97 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block 'main' %}
+
+<style>
+    .order-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: #fff;
+    }
+
+    .order-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-img {
+        height: 200px;
+        object-fit: contain;
+        background-color: #f9f9f9;
+        padding: 10px;
+    }
+
+    .badge-status {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+        border-radius: 20px;
+    }
+
+    .badge-pending {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .badge-shipped {
+        background-color: #0d6efd;
+        color: #fff;
+    }
+
+    .badge-delivered {
+        background-color: #198754;
+        color: #fff;
+    }
+</style>
+
+<div class="container my-5">
+    <h2 class="text-center mb-3">📦 My Orders</h2>
+
+    {% if order_items %}
+    <div class="row">
+        {% for order in order_items %}
+        <div class="col-md-3 mt-3">
+            <div class="card order-card h-100">
+                <img src="{{ order.Productid.Pimage.url }}" alt="{{ order.Productid.name }}" class="card-img-top order-img">
+                <div class="card-body">
+                    <h5 class="card-title">{{ order.Productid.name }}</h5>
+                    <p class="mb-1"><strong>Category:</strong> {{ order.Productid.category }}</p>
+                    <p class="mb-1"><strong>Quantity:</strong> {{ order.quantity }}</p>
+                    <p class="mb-1"><strong>Total:</strong> ₹{{ order.total_amount|floatformat:2 }}</p>
+                    <p class="mb-2"><strong>Order ID:</strong> {{ order.orderid }}</p>
+
+                    <div>
+                        <strong>Status:</strong>
+                        {% if order.status == "Delivered" %}
+                            <span class="badge badge-status badge-delivered">Delivered</span>
+                        {% elif order.status == "Shipped" %}
+                            <span class="badge badge-status badge-shipped">Shipped</span>
+                        {% else %}
+                            <span class="badge badge-status badge-pending">Pending</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center text-muted">
+        <p>You haven't placed any orders yet.</p>
+        <a href="/Products" class="btn btn-outline-success mt-3">Shop Now</a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock 'main' %}
+
+
+<strong>Status:</strong>
+                        {% if order.status == "Delivered" %}
+                            <span class="badge badge-status badge-delivered">Delivered</span>
+                        {% elif order.status == "Shipped" %}
+                            <span class="badge badge-status badge-shipped">Shipped</span>
+                        {% else %}
+                            <span class="badge badge-status badge-pending">Pending</span>
+                        {% endif %}

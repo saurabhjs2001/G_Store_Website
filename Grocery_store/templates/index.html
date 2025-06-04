@@ -1,0 +1,90 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block 'main' %}
+<div class="row2">
+    <a href=""><img src="{% static 'images/sale.png' %}" alt="offer img" width="100%"></a>
+    <button class="carousel-control-prev" type="button" data-bs-target="#groceryCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#groceryCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+</div>
+
+<hr>
+<h1 style="display: flex; justify-content: center;"><strong>SHOP NOW TO GET UPTO 50% OFF </strong></h1>
+<hr>
+<h3 class="catt"><strong>Categories</strong></h3>
+<hr>
+<div class="row">
+    <div class="col-md-2 mb-3">
+        <a href="/Products">
+            <div class="card cat">
+                <img class="card-img-top" src="{% static 'images/all.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">All <br> <br> </p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-2 mb-3">
+        <a href="/filter-by-cat/Fruits & Vegies">
+            <div class="card cat">
+                <img class="card-img-top" src="{% static 'images/fruits & vegetables.png' %}" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">fresh Fruits and vegetables</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-2 mb-3">
+        <a href="/filter-by-cat/Snacks">
+            <div class="card cat">
+                <img class="card-img-top" src="{% static 'images/snacks & Drinks.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">Snacks and bakery<br> <br> </p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-2 mb-3">
+        <a href="/filter-by-cat/Masala">
+            <div class="card cat">
+                <img class="card-img-top" src="{% static 'images/masalas.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">Masalas <br> <br></p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-2 mb-3">
+        <a href="/filter-by-cat/Foodgrains">
+            <div class="card cat">
+                <img class="card-img-top" src="{% static 'images/foodgrains.webp' %}" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">Foodgrains <br> <br></p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-2 mb-3">
+        <a href="/filter-by-cat/Personal_Care">
+            <div class="card cat">
+                <img class="card-img-top" src="{% static 'images/personal care and cleaning.webp' %}"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">Personalcare and <br>cleaning</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <h4 class="foot">The Grocery Store:</h4>
+    <p>We are an online grocery supermarket aiming to simplify your daily shopping experience. We bring you
+        the same products you get in your regular supermarket and more with wholesale prices at your
+        fingertips. this webdite is create to give the fresh and organic foods for you. </p>
+</div>
+</div>
+{% endblock 'main' %}

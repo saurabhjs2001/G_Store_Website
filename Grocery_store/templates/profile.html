@@ -1,0 +1,64 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block 'main' %}
+<style>
+    label{
+       font-weight: bold; 
+    }
+    .profile-container{
+        background-color:whitesmoke;
+    }
+</style>
+<div class="profile-container">
+    <form method="POST" style="border-radius: 15px; margin-bottom: 30px; background-color: rgb(171, 233, 176) ;" action="/profile" class="col-md-6 mt-4 p-4 mx-auto ronded border shadow">
+        {% csrf_token %}
+        <h3 style="display: flex; justify-content: center;">👤 My Profile</h3>
+        {% if message %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-control" value="{{ user.username }}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" value="{{ user.email }}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-control" name="phone" value="{{ profile.phone }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Address</label>
+            <textarea class="form-control" name="address" rows="3" required>{{ profile.address }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Pincode</label>
+            <input type="text" class="form-control" name="pincode" maxlength="6" value="{{ profile.pincode }}" required>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Update Profile</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
